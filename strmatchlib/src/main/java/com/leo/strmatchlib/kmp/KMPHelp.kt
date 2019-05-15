@@ -1,7 +1,8 @@
 package com.leo.strmatchlib.kmp
 
 /**
- * 字符串匹配KMP算法
+ * 字符串匹配
+ * KMP算法
  */
 class KMPHelp {
     companion object {
@@ -9,4 +10,6 @@ class KMPHelp {
             KMPHelp()
         }
     }
+
+
 }

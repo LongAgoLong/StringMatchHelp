@@ -2,6 +2,7 @@ package com.leo.strmatchlib;
 
 import androidx.annotation.NonNull;
 
+import com.leo.strmatchlib.entity.SimilarityResult;
 import com.leo.strmatchlib.similarity.SimilarityHelp;
 
 import java.util.List;
@@ -21,7 +22,8 @@ public class StringCompareHelp {
      * @param targets 目标list
      * @return 最相似的字符串
      */
-    public static String similarityCompare(@NonNull String source, @NonNull List<String> targets) {
+    public static SimilarityResult similarityCompare(@NonNull String source,
+                                                     @NonNull List<String> targets) {
         return SimilarityHelp.Companion.getInstance().compare(source, targets);
     }
 
@@ -37,11 +39,23 @@ public class StringCompareHelp {
     }
 
     /**
+     * 排序
+     *
+     * @param source  源
+     * @param targets 目标list
+     * @return 排序后的字符串list-按分数值降序
+     */
+    public static List<SimilarityResult> similarityCompareSort(@NonNull String source,
+                                                               @NonNull List<String> targets) {
+        return SimilarityHelp.Companion.getInstance().compareSort(source, targets);
+    }
+
+    /**
      * 差异步骤转成分数值
      *
-     * @param step
-     * @param sourceLen
-     * @param targetLen
+     * @param step      源
+     * @param sourceLen 源字符串的长度
+     * @param targetLen 目标字符串的长度
      * @return 分数值-值越大越相似
      */
     public static double similarityStepToScore(int step, int sourceLen, int targetLen) {

@@ -2,9 +2,11 @@ package com.leo.strmatchlib.similarity
 
 import android.text.TextUtils
 import androidx.annotation.NonNull
+import com.leo.strmatchlib.entity.SimilarityResult
 
 /**
- * 字符串匹配相似算法
+ * 字符串匹配
+ * 相似算法
  */
 class SimilarityHelp {
     companion object {
@@ -16,14 +18,17 @@ class SimilarityHelp {
     /**
      * 返回相似度最高的字符串
      */
-    fun compare(@NonNull source: String, @NonNull list: MutableList<String>): String {
+    fun compare(@NonNull source: String, @NonNull targets: MutableList<String>): SimilarityResult {
+        if (targets.isEmpty()) {
+            throw RuntimeException("MutableList is empty")
+        }
         var step = 0
         var result = ""
         /**
          * 利用run+标签来跳出循环
          */
         run loop@{
-            list.forEach(action = {
+            targets.forEach(action = {
                 val matchStep = compare(source, it)
                 if (TextUtils.isEmpty(result)) {
                     step = matchStep
@@ -37,7 +42,26 @@ class SimilarityHelp {
                 }
             })
         }
-        return result
+        return SimilarityResult(step, toScore(step, source.length, result.length), result)
+    }
+
+    /**
+     * 返回排序后的字符串list-按分数值降序
+     */
+    fun compareSort(@NonNull source: String, @NonNull targets: MutableList<String>): MutableList<SimilarityResult> {
+        if (targets.isEmpty()) {
+            throw RuntimeException("MutableList is empty")
+        }
+        val results = mutableListOf<SimilarityResult>()
+        targets.forEach {
+            val mathStep = compare(source, it)
+            val score = toScore(mathStep, source.length, it.length)
+            val entity = SimilarityResult(mathStep, score, it)
+            results.add(entity)
+        }
+        results.sortByDescending { it.score }
+        print(results)
+        return results
     }
 
     /**
