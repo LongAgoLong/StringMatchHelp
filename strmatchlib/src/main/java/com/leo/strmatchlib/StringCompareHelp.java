@@ -3,6 +3,7 @@ package com.leo.strmatchlib;
 import androidx.annotation.NonNull;
 
 import com.leo.strmatchlib.entity.SimilarityResult;
+import com.leo.strmatchlib.kmp.KMPHelp;
 import com.leo.strmatchlib.similarity.SimilarityHelp;
 
 import java.util.List;
@@ -60,5 +61,16 @@ public class StringCompareHelp {
      */
     public static double similarityStepToScore(int step, int sourceLen, int targetLen) {
         return SimilarityHelp.Companion.getInstance().toScore(step, sourceLen, targetLen);
+    }
+
+    /**
+     * KMP匹配算法
+     *
+     * @param sourece 源
+     * @param target  比较文本
+     * @return 若匹配成功，返回t在s中的位置（第一个相同字符对应的位置），若匹配失败，返回-1
+     */
+    public static int kmpMatch(@NonNull String sourece, @NonNull String target) {
+        return KMPHelp.Companion.getInstance().match(sourece, target);
     }
 }

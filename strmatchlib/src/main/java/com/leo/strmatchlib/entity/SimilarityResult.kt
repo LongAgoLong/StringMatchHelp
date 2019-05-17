@@ -1,9 +1,11 @@
 package com.leo.strmatchlib.entity
 
+import com.leo.strmatchlib.interf.IProguard
+
 /**
  * 相似比较返回结果
  */
-class SimilarityResult {
+class SimilarityResult : IProguard {
     var step: Int? = null
     var score: Double? = null
     var target: String? = null
