@@ -1,5 +1,5 @@
 # StringMatchHelp
-封装了字符串相似度匹配算法/KMP算法 
+封装了字符串相似度匹配算法/KMP算法  
 [![](https://jitpack.io/v/LongAgoLong/StringMatchHelp.svg)](https://jitpack.io/#LongAgoLong/StringMatchHelp)    
 **gradle依赖**
 ```java
